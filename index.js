@@ -4,17 +4,17 @@ var width = window.innerWidth; //宽度
 var height = window.innerHeight; //高度
 var k = width / height; //窗口宽高比
 var s = 200;
-var renderer
-var controls 
-var r = 200 //半径200
+var renderer;
+var controls;
+var r = 200; //半径200
 
 function initScene() {
   //场景对象
   scene = new THREE.Scene();
   // scene.background = new THREE.Color(0x101010);
   // 辅助坐标系  参数250表示坐标系大小，可以根据场景大小去设置
-  var axisHelper = new THREE.AxesHelper(250);
-  scene.add(axisHelper);
+  // var axisHelper = new THREE.AxesHelper(250);
+  // scene.add(axisHelper);
 }
 
 function initCamera() {
@@ -26,71 +26,6 @@ function initCamera() {
 }
 
 function initControls() {}
-
-function createGeometry1(width,height,rotateY,xyz) {
-  //   var geometry = new THREE.SphereGeometry(10, 4, 4); //球体
-  // var geometry = new THREE.BoxGeometry(10, 10, 10);
-  //   geometry.scale(10,10,-10)
-  var geometry = new THREE.PlaneGeometry(width, height); //矩形平面
-  // var geometry = new THREE.SphereGeometry(60, 25, 25); //球体
-  // var geometry = new THREE.CylinderGeometry(60, 60, 25,25); //圆柱
-  //
-  // 材质对象1
-  var textureLoader = new THREE.TextureLoader();
-  // 加载法线贴图
-   textureLoader.load("./assets/image/left.png",function(texture) {
-      // var textureNormal = textureLoader.load('./R.jpeg');
-  var material = new THREE.MeshBasicMaterial({
-    map: texture, // 普通颜色纹理贴图
-  }); //材质对象Material
-  var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-
-  //设置中心坐标
-  mesh.position.set(...xyz)
-  //设置偏移
-  mesh.rotateY(rotateY) //10度
-  
-  // mesh.geometry.scale(10, 10, -10);
-  scene.add(mesh); //网格模型添加到场景中 
-  });
-  
-}
-
-function createGeometry2() {
-  var geometry = new THREE.PlaneGeometry(640, 480); //矩形平面
-  // 材质对象1
-  var textureLoader = new THREE.TextureLoader();
-  // 加载法线贴图
-  var texture = textureLoader.load("./assets/image/right.png");
-  var material = new THREE.MeshBasicMaterial({
-    map: texture, // 普通颜色纹理贴图
-  }); //材质对象Material
-  var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-
-  //设置中心坐标
-  mesh.position.set(230,0,0)
-  //设置偏移
-  mesh.rotateY(-Math.PI/18) //-10度
-  scene.add(mesh); //网格模型添加到场景中 
-}
-
-function createGeometry3() {
-  var geometry = new THREE.PlaneGeometry(640, 480); //矩形平面
-  // 材质对象1
-  var textureLoader = new THREE.TextureLoader();
-  // 加载法线贴图
-  var texture = textureLoader.load("./assets/image/right.png");
-  var material = new THREE.MeshBasicMaterial({
-    map: texture, // 普通颜色纹理贴图
-  }); //材质对象Material
-  var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
-
-  //设置中心坐标
-  mesh.position.set(400,0,60)
-  //设置偏移
-  mesh.rotateY(-Math.PI/6) //-30
-  scene.add(mesh); //网格模型添加到场景中 
-}
 
 /**
  * 光源设置
@@ -121,17 +56,16 @@ function initLight() {
   // scene.add(directionalLight);
 }
 
- /**
+/**
  * 创建渲染器对象
  * */
 function initRender() {
- 
-renderer = new THREE.WebGLRenderer();
-renderer.setSize(width, height); //设置渲染区域尺寸
-renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
-document.body.appendChild(renderer.domElement);
-//执行渲染操作
-renderer.render(scene, camera);
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(width, height); //设置渲染区域尺寸
+  renderer.setClearColor("#000000", 1); //设置背景颜色
+  document.body.appendChild(renderer.domElement);
+  //执行渲染操作
+  renderer.render(scene, camera);
 }
 
 function render() {
@@ -146,7 +80,9 @@ function initControls() {
 initScene();
 initCamera();
 initLight();
-initRender()
-initControls()
+initRender();
+initControls();
 render();
+addMoon();
+addSky();
 // controls.addEventListener('change', render);//监听鼠标、键盘事件
