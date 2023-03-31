@@ -70,6 +70,16 @@ function initRender() {
 
 function render() {
   renderer.render(scene, camera); //执行渲染操作
+
+  // 更新月亮的旋转角度
+  moonRotation += 0.00001;
+
+  // 根据旋转角度创建新的旋转矩阵
+  var moonRotationMatrix = new THREE.Matrix4().makeRotationY(moonRotation);
+
+  // 应用旋转矩阵到月亮上
+  moon.applyMatrix4(moonRotationMatrix);
+
   requestAnimationFrame(render); //请求再次执行渲染函数render
 }
 
@@ -82,7 +92,9 @@ initCamera();
 initLight();
 initRender();
 initControls();
-render();
 addMoon();
 addSky();
+addStars();
+render();
+addKeyDownEvent();
 // controls.addEventListener('change', render);//监听鼠标、键盘事件
