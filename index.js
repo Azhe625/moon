@@ -72,7 +72,7 @@ function render() {
   renderer.render(scene, camera); //执行渲染操作
 
   // 更新月亮的旋转角度
-  moonRotation += 0.00001;
+  moonRotation += 0.000001;
 
   // 根据旋转角度创建新的旋转矩阵
   var moonRotationMatrix = new THREE.Matrix4().makeRotationY(moonRotation);
