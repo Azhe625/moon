@@ -4,7 +4,7 @@ var moonRotation = 0;
 function addMoon() {
   var geometry = new THREE.SphereGeometry(50, 100, 100);
   console.log("load贴图");
-  var texture = new THREE.TextureLoader().load("../assets/jpg/8k_moon.jpeg");
+  var texture = new THREE.TextureLoader().load("/moon/8k_moon.jpeg");
   var material = new THREE.MeshBasicMaterial({ map: texture });
   moon = new THREE.Mesh(geometry, material);
   scene.add(moon);
@@ -13,7 +13,7 @@ function addMoon() {
 function addSky() {
   var skyGeometry = new THREE.SphereGeometry(1000, 32, 32);
   var skyTexture = new THREE.TextureLoader().load(
-    "../assets/jpg/8k_stars_milky_way.jpeg"
+    "/moon/8k_stars_milky_way.jpeg"
   );
   var skyMaterial = new THREE.MeshBasicMaterial({
     map: skyTexture,
